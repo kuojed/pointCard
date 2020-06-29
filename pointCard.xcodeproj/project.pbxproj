@@ -21,6 +21,8 @@
 		7200D436248BC6590093598B /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200D435248BC6590093598B /* NewCardView.swift */; };
 		7200D438248BC6730093598B /* CardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200D437248BC6730093598B /* CardRow.swift */; };
 		724895A6248C9E75003DB85E /* jf-openhuninn-1.1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 724895A5248C9E75003DB85E /* jf-openhuninn-1.1.ttf */; };
+		7253CF1924A8D5950082F0A9 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7253CF1824A8D5950082F0A9 /* AppView.swift */; };
+		7253CF1B24A8E0AB0082F0A9 /* HistoryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7253CF1A24A8E0AB0082F0A9 /* HistoryDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		7200D435248BC6590093598B /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		7200D437248BC6730093598B /* CardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRow.swift; sourceTree = "<group>"; };
 		724895A5248C9E75003DB85E /* jf-openhuninn-1.1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "jf-openhuninn-1.1.ttf"; sourceTree = "<group>"; };
+		7253CF1824A8D5950082F0A9 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		7253CF1A24A8E0AB0082F0A9 /* HistoryDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +77,11 @@
 			isa = PBXGroup;
 			children = (
 				7200D42F248BC5F20093598B /* HistoryInfo.swift */,
+				7253CF1A24A8E0AB0082F0A9 /* HistoryDataStore.swift */,
 				7200D42B248BC58D0093598B /* wordInfo.swift */,
 				7200D417248BC4710093598B /* AppDelegate.swift */,
 				7200D419248BC4710093598B /* SceneDelegate.swift */,
+				7253CF1824A8D5950082F0A9 /* AppView.swift */,
 				7200D41B248BC4710093598B /* ContentView.swift */,
 				7200D42D248BC5C70093598B /* StopWatchView.swift */,
 				7200D431248BC61C0093598B /* WordPictureView.swift */,
@@ -175,7 +181,9 @@
 				7200D418248BC4710093598B /* AppDelegate.swift in Sources */,
 				7200D438248BC6730093598B /* CardRow.swift in Sources */,
 				7200D42E248BC5C70093598B /* StopWatchView.swift in Sources */,
+				7253CF1924A8D5950082F0A9 /* AppView.swift in Sources */,
 				7200D432248BC61C0093598B /* WordPictureView.swift in Sources */,
+				7253CF1B24A8E0AB0082F0A9 /* HistoryDataStore.swift in Sources */,
 				7200D42C248BC58E0093598B /* wordInfo.swift in Sources */,
 				7200D41A248BC4710093598B /* SceneDelegate.swift in Sources */,
 				7200D434248BC63A0093598B /* NewPageView.swift in Sources */,
@@ -317,7 +325,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pointCard/Preview Content\"";
 				DEVELOPMENT_TEAM = 8P9976NDF8;
 				ENABLE_PREVIEWS = YES;
@@ -326,6 +334,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jedkuo.baiwan;
 				PRODUCT_NAME = pointCard;
 				SWIFT_VERSION = 5.0;
@@ -338,7 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pointCard/Preview Content\"";
 				DEVELOPMENT_TEAM = 8P9976NDF8;
 				ENABLE_PREVIEWS = YES;
@@ -347,6 +356,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jedkuo.baiwan;
 				PRODUCT_NAME = pointCard;
 				SWIFT_VERSION = 5.0;

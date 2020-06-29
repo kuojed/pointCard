@@ -10,6 +10,8 @@ import SwiftUI
 
 struct NewPageView: View {
     
+    @EnvironmentObject var historyDataStore: HistoryDataStore
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Binding var showNewPageView: Bool
@@ -27,14 +29,16 @@ struct NewPageView: View {
     
     @Binding var ButtonStatus: Bool
     
+    let screenH = UIScreen.main.bounds.height // 讀取螢幕高度
+    
     var body: some View {
         
         ZStack{
             
             Color(red: 250/255, green: 250/255, blue: 250/255)
             
-            VStack(spacing: 30) {
-                HStack(spacing: 30) {
+            VStack(spacing: screenH > 800 ? 30 : 25) {
+                HStack(spacing: screenH > 800 ? 35 : 30) {
                     NewCardView(word: wordType[randomWordSquence[0]], backgroundColor: colorType[randomColorSquence[0]]!, chooseStatus: chooseStatus1)
                         .onTapGesture{
                             
@@ -58,7 +62,7 @@ struct NewPageView: View {
                     }
                     
                 }
-                HStack(spacing: 30) {
+                HStack(spacing: screenH > 800 ? 35 : 30) {
                     NewCardView(word: wordType[randomWordSquence[2]], backgroundColor: colorType[randomColorSquence[2]]!, chooseStatus: chooseStatus3)
                         .onTapGesture{
                             self.chooseStatus3.toggle()
@@ -81,7 +85,7 @@ struct NewPageView: View {
                     
                 }
                 
-                HStack(spacing: 90){
+                HStack(spacing: screenH > 800 ? 100 : 90){
                     
                     Button(action: {
                         
@@ -98,13 +102,13 @@ struct NewPageView: View {
                         VStack{
                             ZStack{
                                 Circle()
-                                    .frame(width: 60, height: 60)
+                                    .frame(width: screenH > 800 ? 70 : 60, height: screenH > 800 ? 70 : 60)
                                     .foregroundColor(Color(red: 230/255, green: 230/255, blue: 230/255))
                                 
                                 Image(systemName: "arrow.clockwise")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: screenH > 800 ? 35 : 30, height: screenH > 800 ? 35 : 30)
                                     .foregroundColor(.black)
                             }
                             
@@ -114,7 +118,7 @@ struct NewPageView: View {
                             Text("重新產生")
                                 .foregroundColor(.black)
 //                                .font(.system(size: 20))
-                            .font(.custom("jf-openhuninn-1.1", size: 20))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 23 : 20))
                             
                         }
                         
@@ -201,19 +205,19 @@ struct NewPageView: View {
 //                        let finishTimeMonth = String(finishTime.month!)
 //                        let finishTimelDay = String(finishTime.day!)
                         
-                        let cardCount = historydata.count
+                        let cardCount = self.historyDataStore.historydata.count
                         
 //                        print(cardCount)
                         
-                        historydata[0].endTime = [finishTimeYear, finishTimeMonth, finishTimelDay]
+                        self.historyDataStore.historydata[0].endTime = [finishTimeYear, finishTimeMonth, finishTimelDay]
                         
-                        historydata.insert(HistoryData(word: userCardWord , num: String(cardCount + 1), cardColor: userCardColor ?? "綠", startTime: [finishTimeYear, finishTimeMonth, finishTimelDay], endTime: nil), at: 0)
+                        self.historyDataStore.historydata.insert(HistoryData(word: userCardWord , num: String(cardCount + 1), cardColor: userCardColor ?? "綠", startTime: [finishTimeYear, finishTimeMonth, finishTimelDay], endTime: nil), at: 0)
                         
                         UserDefaults.standard.set(userCardColor, forKey: "color")
                         
                         UserDefaults.standard.set(userCardWord, forKey: "word")
                         
-                        saveHistorydata()
+                        self.historyDataStore.saveHistorydata()
                         
                         self.presentationMode.wrappedValue.dismiss()
                         
@@ -221,13 +225,13 @@ struct NewPageView: View {
                         VStack{
                             ZStack{
                                 Circle()
-                                    .frame(width: 60, height: 60)
+                                    .frame(width: screenH > 800 ? 70 : 60, height: screenH > 800 ? 70 : 60)
                                     .foregroundColor(Color(red: 230/255, green: 230/255, blue: 230/255))
                                 
                                 Image(systemName: "arrow.right")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: screenH > 800 ? 35 : 30, height: screenH > 800 ? 35 : 30)
                                     .foregroundColor(checkOn == true ? Color.black : Color.white)
                             }
                             
@@ -235,7 +239,7 @@ struct NewPageView: View {
                             Text("確認")
                                 .foregroundColor(checkOn == true ? Color.black : Color.gray)
 //                                .font(.system(size: 20))
-                            .font(.custom("jf-openhuninn-1.1", size: 20))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 23 : 20))
                             
                         }
                     }

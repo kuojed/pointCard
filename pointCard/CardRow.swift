@@ -11,6 +11,7 @@ import SwiftUI
 struct CardRow: View {
     
     let data: HistoryData
+    let screenH = UIScreen.main.bounds.height // 讀取螢幕高度
     
     var body: some View {
         
@@ -18,25 +19,25 @@ struct CardRow: View {
             
             Rectangle()
                 .foregroundColor(.white)
-                .frame(width: 360, height: 220)
+                .frame(width: screenH > 800 ? 360 : 330, height: screenH > 800 ? 210 : 200)
                 .cornerRadius(25)
             
-            HStack(alignment: .center, spacing: 50){
+            HStack(alignment: .center, spacing: 40){
                 
                 ZStack{
                     
                     Rectangle()
                         .fill(colorType[data.cardColor]!)
-                        .frame(width: 120, height: 200)
+                        .frame(width: screenH > 800 ? 120 : 110, height: screenH > 800 ? 190 : 180)
                     
                     VStack(spacing: 15){
                         Text(data.word[0])
                             .foregroundColor(data.endTime != nil ? .blue : .white)
-                            .font(.custom("jf-openhuninn-1.1", size: 70))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 65 : 60))
 
                         Text(data.word[1])
                             .foregroundColor(data.endTime != nil ? .blue : .white)
-                            .font(.custom("jf-openhuninn-1.1", size: 70))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 65 : 60))
                     }
                 }
                 
@@ -66,7 +67,7 @@ struct CardRow: View {
                 
             }
         }
-        .overlay(Text(data.num).offset(x: 15, y: 0).font(.system(size: 20)), alignment: .leading)
+        .overlay(Text(data.num).offset(x: screenH > 800 ? 15 : 10, y: 0).font(.system(size: 20)), alignment: .leading)
         
         
         
@@ -74,8 +75,8 @@ struct CardRow: View {
     }
 }
 
-struct CardRow_Previews: PreviewProvider {
-    static var previews: some View {
-        CardRow(data: historydata[0])
-    }
-}
+//struct CardRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardRow(data: historydata[0])
+//    }
+//}

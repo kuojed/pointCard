@@ -55,16 +55,17 @@ struct HistoryData: Codable {
     
 }
 
-var historydata = [
-    
-    HistoryData(word: ["加", "油"], num: "1", cardColor: "紅", startTime: ["2020", "5", "31"], endTime: nil),
-    HistoryData(word: ["勇", "氣"], num: "2", cardColor: "黃", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
-    HistoryData(word: ["希", "望"], num: "3", cardColor: "綠", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
-    HistoryData(word: ["必", "勝"], num: "4", cardColor: "藍", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
-    HistoryData(word: ["師", "弟"], num: "5", cardColor: "紫", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"])
-    
-]
+//var historydata = [
+//
+//    HistoryData(word: ["加", "油"], num: "1", cardColor: "紅", startTime: ["2020", "5", "31"], endTime: nil),
+//    HistoryData(word: ["勇", "氣"], num: "2", cardColor: "黃", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
+//    HistoryData(word: ["希", "望"], num: "3", cardColor: "綠", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
+//    HistoryData(word: ["必", "勝"], num: "4", cardColor: "藍", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"]),
+//    HistoryData(word: ["師", "弟"], num: "5", cardColor: "紫", startTime: ["2020", "5", "31"], endTime: ["2020", "4", "5"])
+//
+//]
 
+/*
 func saveHistorydata() {
     if let data = try? JSONEncoder().encode(historydata) {
         UserDefaults.standard.set(data, forKey: "historydata")
@@ -106,34 +107,39 @@ func readHistorydata()  {
         saveHistorydata()
     }
 }
+*/
 
 struct HistoryInfo: View {
+    
+    @EnvironmentObject var historyDataStore: HistoryDataStore
+    
     var body: some View {
-        
-        ZStack{
+        return NavigationView{
             
-            Color(red: 220/255, green: 220/255, blue: 220/255)
-                .edgesIgnoringSafeArea(.all)
-            
-            ScrollView (showsIndicators: false) {
+            ZStack{
                 
+                LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 160/255, blue: 200/255), Color(red: 120/255, green: 180/255, blue: 220/255)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
                 
-                VStack{
+                ScrollView (showsIndicators: false) {
                     
-                    ForEach(0..<historydata.count, id: \.self) { item in
-                        CardRow(data: historydata[item])
+                    
+                    VStack{
+                        
+                        ForEach(0..<historyDataStore.historydata.count, id: \.self) { item in
+                            CardRow(data: self.historyDataStore.historydata[item])
+                           // Text(historydata[item].word.description)
+                        }
                         
                     }
-                    
                 }
+                
             }
-            
-        }
-        .navigationBarTitle("歷史紀錄")
+            .navigationBarTitle("歷史紀錄", displayMode: .inline)
+           
+        } // NavigationView
         
     }
 }
-
 
 struct HistoryInfo_Previews: PreviewProvider {
     static var previews: some View {

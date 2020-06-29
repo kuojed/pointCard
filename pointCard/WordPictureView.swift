@@ -28,14 +28,14 @@ struct WordPictureView: View {
     func checkCount (h: Int, m: Int, s: Int) -> Int {
         
         return (h * 60 + m) / step
-        //                return (m * 60 + s) / step
+//                        return (m * 60 + s) / step
         
     } // 計算格數
     
     func differenceCount (h_in: Int, m_in: Int, s_in: Int) -> (h_out: Int, m_out: Int, s_out: Int) {
         
         let d = h_in * 3600 + m_in * 60 + s_in - 80 * step * 60
-//        let d = h_in * 3600 + m_in * 60 + s_in - 80 * step
+//                let d = h_in * 3600 + m_in * 60 + s_in - 80 * step
         
         let s_out = d % 60
         let m_out = (d / 60) % 60
@@ -47,116 +47,123 @@ struct WordPictureView: View {
     
     var body: some View {
         
-        ZStack(alignment: .bottom){
-            ZStack{
+        NavigationView{
+            
+            NavigationLink(destination: NewPageView(showNewPageView: self.$showNewPageView, ButtonStatus: self.$buttonOff)) {
                 
-                
-                ZStack(alignment: .top){
+                ZStack(alignment: .bottom){
                     
-                    Rectangle()
-                        .foregroundColor(colorType[userCardColor ?? "綠"])
-                    
-                    if buttonOff == true {
-                        Text("目前累積: \(daimokuCount(h: systemTime.hour ?? 0, m: systemTime.minute ?? 0, s: systemTime.second ?? 0)) 遍")
-                            .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
-                            .font(.custom("jf-openhuninn-1.1", size: 25))
-                            .offset(x: 0, y: 15)
-                    } else {
+                    ZStack{
                         
-                        HStack{
-                            Text("恭喜達成!")
-                                .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
-                                .font(.custom("jf-openhuninn-1.1", size: 25))
-                                .offset(x: 0, y: 15)
+                        
+                        ZStack(alignment: .top){
                             
+                            Rectangle()
+                                .foregroundColor(colorType[userCardColor ?? "綠"])
                             
+                            if buttonOff == true {
+                                Text("目前累積: \(daimokuCount(h: systemTime.hour ?? 0, m: systemTime.minute ?? 0, s: systemTime.second ?? 0)) 遍")
+                                    .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
+                                    .font(.custom("jf-openhuninn-1.1", size: 25))
+                                    .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                            } else {
+                                
+                                HStack{
+                                    Text("恭喜達成!")
+                                        .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
+                                        .font(.custom("jf-openhuninn-1.1", size: 25))
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                    
+                                    
+                                    
+                                    Image(systemName: "smiley")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
+                                        .frame(width: 25, height: 25)
+                                        .rotationEffect(.degrees(0))
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                    
+                                    Text("(點選下張)")
+                                        .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
+                                        .font(.custom("jf-openhuninn-1.1", size: 25))
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                }
+                                
+                                
+                            }
                             
-                            Image(systemName: "smiley")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
-                                .frame(width: 25, height: 25)
-                                .rotationEffect(.degrees(0))
-                                .offset(x: 0, y: 15)
-                            
-                            Text("(點選下張)")
-                                .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
-                                .font(.custom("jf-openhuninn-1.1", size: 25))
-                                .offset(x: 0, y: 15)
                         }
                         
                         
+                        
+                        
+                        VStack{
+                            
+                            WordView(wordInfo: wordInfoData.wordInfos[userCardWord[0]]!)
+                                .scaleEffect(screenH > 800 ? 1 : 0.85)
+                                .offset(x: 0, y: screenH > 800 ? 0 : 40)
+                            
+                            WordView(wordInfo: wordInfoData.wordInfos[userCardWord[1]]!)
+                                .scaleEffect(screenH > 800 ? 1 : 0.85)
+                                .offset(x: 0, y: screenH > 800 ? 10 : -30)
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    Text("一格: 25分鐘, 共計十萬遍")
+                        .font(.custom("jf-openhuninn-1.1", size: 20))
+                        .foregroundColor(Color(red: 100/255, green: 100/255, blue: 100/255))
+                        .offset(x: 0, y: screenH > 800 ? -20 : -40)
+                    
+                }
+                .navigationBarTitle(Text("題目數"), displayMode: .inline)
+            }
+            .disabled(buttonOff)
+            .onAppear {
+                
+                for i in self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos.indices {
+                    self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = false
+                    self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i].isFill = false
+                }
+                
+                var count = self.checkCount(h: systemTime.hour ?? 0, m: systemTime.minute ?? 0, s: systemTime.second ?? 0)
+                
+                //                60 * (systemTime.minute ?? 0) + (systemTime.second ?? 0)
+                
+                //            print(count)
+                
+                if count >= 80 {
+                    
+                    let result = self.differenceCount(h_in: systemTime.hour ?? 0, m_in: systemTime.minute ?? 0, s_in: systemTime.second ?? 0)
+                    
+                    residualTime_hour = result.h_out
+                    residualTime_minute = result.m_out
+                    residualTime_second = result.s_out
+                    
+                    count = 80
+                    
+                    //                print("剩餘: \(result)")
+                }
+                
+                for i in 0 ..< count {
+                    
+                    if i < 40 {
+                        self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = true
+                        
+                    } else if i < 79 {
+                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
+                    } else if i == 79 {
+                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
+                        self.buttonOff = false
                     }
                     
                 }
-                
-                
-                NavigationLink(destination: NewPageView(showNewPageView: self.$showNewPageView, ButtonStatus: self.$buttonOff)) {
-                    
-                    VStack{
-                        
-                        WordView(wordInfo: wordInfoData.wordInfos[userCardWord[0]]!)
-                            .scaleEffect(screenH > 800 ? 0.95 : 0.9)
-                            .offset(x: 0, y: screenH > 800 ? 0 : 30)
-                        
-                        WordView(wordInfo: wordInfoData.wordInfos[userCardWord[1]]!)
-                            .scaleEffect(screenH > 800 ? 0.95 : 0.9)
-                            .offset(x: 0, y: screenH > 800 ? 0 : -10)
-                        
-                    }
-                }
-                .disabled(buttonOff)
-                
-                
             }
             
-            Text("一格: 25分鐘, 共計十萬遍")
-                .font(.custom("jf-openhuninn-1.1", size: 20))
-                .foregroundColor(Color(red: 100/255, green: 100/255, blue: 100/255))
-                .offset(x: 0, y: screenH > 800 ? -10 : -8)
-            
-        }
-        .navigationBarTitle("題目數")
-        .onAppear {
-            
-            
-            for i in self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos.indices {
-                self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = false
-                self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i].isFill = false
-            }
-            
-            var count = self.checkCount(h: systemTime.hour ?? 0, m: systemTime.minute ?? 0, s: systemTime.second ?? 0)
-            
-            //                60 * (systemTime.minute ?? 0) + (systemTime.second ?? 0)
-            
-            //            print(count)
-            
-            if count >= 80 {
-                
-                let result = self.differenceCount(h_in: systemTime.hour ?? 0, m_in: systemTime.minute ?? 0, s_in: systemTime.second ?? 0)
-                
-                residualTime_hour = result.h_out
-                residualTime_minute = result.m_out
-                residualTime_second = result.s_out
-                
-                count = 80
-                
-                //                print("剩餘: \(result)")
-            }
-            
-            for i in 0 ..< count {
-                
-                if i < 40 {
-                    self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = true
-                    
-                } else if i < 79 {
-                    self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
-                } else if i == 79 {
-                    self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
-                    self.buttonOff = false
-                }
-                
-            }
         }
         //       .sheet(isPresented: $showNewPageView) {
         //            NewPageView(showNewPageView: self.$showNewPageView)
@@ -210,7 +217,7 @@ struct FillCircle: View {
     var body: some View {
         Circle()
             .fill()
-            .frame(width: 12, height: 12)
+            .frame(width: 10, height: 10)
             .foregroundColor(.blue)
             .offset(offsetSize)
     }
@@ -223,7 +230,7 @@ struct EmptyCircle: View {
     var body: some View {
         Circle()
             .stroke()
-            .frame(width: 12, height: 12)
+            .frame(width: 10, height: 10)
             .foregroundColor(.black)
             .offset(offsetSize)
     }

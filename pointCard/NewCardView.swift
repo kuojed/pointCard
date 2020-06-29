@@ -13,6 +13,7 @@ struct NewCardView: View {
     let word: [String]
     let backgroundColor: Color
     var chooseStatus = true
+    let screenH = UIScreen.main.bounds.height // 讀取螢幕高度
     
     var body: some View {
         
@@ -21,18 +22,18 @@ struct NewCardView: View {
             
             Rectangle()
                 .fill(backgroundColor)
-                .frame(width: 120, height: 200)
+                .frame(width: screenH > 800 ? 140 : 120, height: screenH > 800 ? 220 : 190)
                 .overlay(
                     
                     VStack(spacing: 10){
                         Text(word[0])
                             .foregroundColor(.white)
-                            .font(.custom("jf-openhuninn-1.1", size: 70))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 75 : 65))
 //                            .font(.system(size: 70))
                         
                         Text(word[1])
                             .foregroundColor(.white)
-                            .font(.custom("jf-openhuninn-1.1", size: 70))
+                            .font(.custom("jf-openhuninn-1.1", size: screenH > 800 ? 75 : 65))
 //                            .font(.system(size: 70))
                     }
             )

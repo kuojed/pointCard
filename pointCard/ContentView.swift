@@ -117,9 +117,9 @@ struct ContentView: View {
                     
                 }
                 .navigationBarTitle(Text("首頁"),   displayMode: .inline)
-                .sheet(isPresented: $showStopWatchView) {
-                    StopWatchView(showStopWatchView: self.$showStopWatchView)
-                }
+//                .sheet(isPresented: $showStopWatchView) {
+//                    StopWatchView(showStopWatchView: self.$showStopWatchView)
+//                }
             }
         }
     }
