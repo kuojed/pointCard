@@ -28,14 +28,14 @@ struct WordPictureView: View {
     func checkCount (h: Int, m: Int, s: Int) -> Int {
         
         return (h * 60 + m) / step
-//                        return (m * 60 + s) / step
+//                return (m * 60 + s) / step // (測試)
         
     } // 計算格數
     
     func differenceCount (h_in: Int, m_in: Int, s_in: Int) -> (h_out: Int, m_out: Int, s_out: Int) {
         
         let d = h_in * 3600 + m_in * 60 + s_in - 80 * step * 60
-//                let d = h_in * 3600 + m_in * 60 + s_in - 80 * step
+//                let d = h_in * 3600 + m_in * 60 + s_in - 80 * step // (測試)
         
         let s_out = d % 60
         let m_out = (d / 60) % 60
@@ -65,14 +65,14 @@ struct WordPictureView: View {
                                 Text("目前累積: \(daimokuCount(h: systemTime.hour ?? 0, m: systemTime.minute ?? 0, s: systemTime.second ?? 0)) 遍")
                                     .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
                                     .font(.custom("jf-openhuninn-1.1", size: 25))
-                                    .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                    .offset(x: 0, y: screenH > 800 ? 20 : 38)
                             } else {
                                 
                                 HStack{
                                     Text("恭喜達成!")
                                         .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
                                         .font(.custom("jf-openhuninn-1.1", size: 25))
-                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 38)
                                     
                                     
                                     
@@ -82,12 +82,12 @@ struct WordPictureView: View {
                                         .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
                                         .frame(width: 25, height: 25)
                                         .rotationEffect(.degrees(0))
-                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 38)
                                     
                                     Text("(點選下張)")
                                         .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
                                         .font(.custom("jf-openhuninn-1.1", size: 25))
-                                        .offset(x: 0, y: screenH > 800 ? 20 : 40)
+                                        .offset(x: 0, y: screenH > 800 ? 20 : 38)
                                 }
                                 
                                 
@@ -101,11 +101,11 @@ struct WordPictureView: View {
                         VStack{
                             
                             WordView(wordInfo: wordInfoData.wordInfos[userCardWord[0]]!)
-                                .scaleEffect(screenH > 800 ? 1 : 0.85)
+                                .scaleEffect(screenH > 800 ? 1 : 0.8)
                                 .offset(x: 0, y: screenH > 800 ? 0 : 40)
                             
                             WordView(wordInfo: wordInfoData.wordInfos[userCardWord[1]]!)
-                                .scaleEffect(screenH > 800 ? 1 : 0.85)
+                                .scaleEffect(screenH > 800 ? 1 : 0.8)
                                 .offset(x: 0, y: screenH > 800 ? 10 : -30)
                             
                         }
@@ -117,7 +117,7 @@ struct WordPictureView: View {
                     Text("一格: 25分鐘, 共計十萬遍")
                         .font(.custom("jf-openhuninn-1.1", size: 20))
                         .foregroundColor(Color(red: 100/255, green: 100/255, blue: 100/255))
-                        .offset(x: 0, y: screenH > 800 ? -20 : -40)
+                        .offset(x: 0, y: screenH > 800 ? -20 : -35)
                     
                 }
                 .navigationBarTitle(Text("題目數"), displayMode: .inline)
@@ -125,8 +125,12 @@ struct WordPictureView: View {
             .disabled(buttonOff)
             .onAppear {
                 
-                for i in self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos.indices {
+                for i in 0 ..< self.wordInfoData.wordInfos[userCardWord[0]]!.count {
                     self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = false
+                }
+                
+                for i in 0 ..< self.wordInfoData.wordInfos[userCardWord[1]]!.count {
+                    
                     self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i].isFill = false
                 }
                 
@@ -151,13 +155,13 @@ struct WordPictureView: View {
                 
                 for i in 0 ..< count {
                     
-                    if i < 40 {
+                    if i < self.wordInfoData.wordInfos[userCardWord[0]]!.count {
                         self.wordInfoData.wordInfos[userCardWord[0]]!.circleInfos[i].isFill = true
                         
-                    } else if i < 79 {
-                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
-                    } else if i == 79 {
-                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-40].isFill = true
+                    } else if i < self.wordInfoData.wordInfos[userCardWord[0]]!.count + self.wordInfoData.wordInfos[userCardWord[1]]!.count - 1 {
+                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-self.wordInfoData.wordInfos[userCardWord[0]]!.count].isFill = true
+                    } else if i == self.wordInfoData.wordInfos[userCardWord[0]]!.count + self.wordInfoData.wordInfos[userCardWord[1]]!.count - 1 {
+                        self.wordInfoData.wordInfos[userCardWord[1]]!.circleInfos[i-self.wordInfoData.wordInfos[userCardWord[0]]!.count].isFill = true
                         self.buttonOff = false
                     }
                     
@@ -235,4 +239,3 @@ struct EmptyCircle: View {
             .offset(offsetSize)
     }
 }
-

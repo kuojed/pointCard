@@ -13,6 +13,7 @@ import SwiftUI
 struct WordInfo {
     let word: String
     var circleInfos: [CircleInfo]
+    let count: Int
     
     struct CircleInfo: Identifiable {
         let id = UUID()
@@ -28,6 +29,7 @@ class WordInfoData: ObservableObject {
     @Published var wordInfos = [
         
         "加" :   WordInfo(word: "加", circleInfos: [
+            
             WordInfo.CircleInfo(offsetSize: CGSize(width: -118, height: -73), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -93, height: -73), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -68, height: -73), isFill: false),
@@ -69,7 +71,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 98, height: 106), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 68, height: 108), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "油" : WordInfo(word: "油", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -95, height: -110), isFill: false),
@@ -113,7 +115,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 35, height: 113), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 75, height: 113), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "勇" : WordInfo(word: "勇", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -95, height: -117), isFill: false),
@@ -157,7 +159,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: -85, height: 117), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -115, height: 121), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "氣" : WordInfo(word: "氣", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -68, height: -120), isFill: false),
@@ -201,7 +203,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 10, height: 82), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 42, height: 100), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "希" : WordInfo(word: "希", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: 66, height: -120), isFill: false),
@@ -245,7 +247,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 10, height: 85), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 10, height: 115), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "望" : WordInfo(word: "望", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -65, height: -120), isFill: false),
@@ -289,65 +291,61 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: -1, height: 48), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -1, height: 92), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "必" : WordInfo(word: "必", circleInfos: [
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -102, height: -30), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -10), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -110, height: 10), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -114, height: 28), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -119, height: 47), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -103, height: -22), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -110, height: 13), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -119, height: 45), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: -60), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: -35), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: -10), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 15), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 40), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 65), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: -30), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 0), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 30), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 60), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -46, height: 90), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -41, height: 110), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -20, height: 115), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 6, height: 115), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 33, height: 115), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 55, height: 110), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -38, height: 112), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -8, height: 115), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 22, height: 115), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 52, height: 110), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 70, height: 95), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 73, height: 73), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -25, height: -113), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -10, height: -100), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 5, height: -88), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 20, height: -75), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 89, height: -15), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 100, height: 4), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 110, height: 25), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 120, height: 45), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 69, height: -100), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 61, height: -80), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 53, height: -60), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 43, height: -40), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 33, height: -20), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 21, height: 0), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 7, height: 20), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -8, height: 38), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -22, height: 53), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -63, height: 82), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: 92), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -98, height: 100), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -115, height: 108), isFill: false)
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -22, height: -110), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -2, height: -95), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 18, height: -77), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 92, height: -10), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 105, height: 15), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 117, height: 40), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 67, height: -95), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 55, height: -65), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 41, height: -35), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 25, height: -8), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 8, height: 17), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -14, height: 43), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -67, height: 86), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -92, height: 98), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -115, height: 109), isFill: false)
             
-        ]),
+        ], count: 30),
         
         "勝" : WordInfo(word: "勝", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -103, height: -110), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -70), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -10), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -80), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -50), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -106, height: -20), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -106, height: 10), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -107, height: 45), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -116, height: 100), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -112, height: 78), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -120, height: 108), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: -113), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -58, height: -108), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -70), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -10), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -80), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -50), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -20), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 10), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 45), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 90), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -73, height: 120), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 75), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 105), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -75, height: 120), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: -46), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: 22), isFill: false), //月
             WordInfo.CircleInfo(offsetSize: CGSize(width: -17, height: -105), isFill: false),
@@ -368,16 +366,20 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 67, height: -47), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 103, height: 15), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -5, height: 37), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 30, height: 37), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 65, height: 37), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 94, height: 55), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 25, height: 37), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 55, height: 37), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 85, height: 39), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 94, height: 65), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 92, height: 93), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 60, height: 120), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 80, height: 115), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 55, height: 120), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 37, height: 12), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: 23, height: 75), isFill: false),
-            WordInfo.CircleInfo(offsetSize: CGSize(width: -15, height: 112), isFill: false)
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 30, height: 60), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 18, height: 82), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: 0, height: 102), isFill: false),
+            WordInfo.CircleInfo(offsetSize: CGSize(width: -20, height: 115), isFill: false)
             
-        ]),
+        ], count: 50),
         
         "師" : WordInfo(word: "師", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -78, height: -117), isFill: false),
@@ -421,7 +423,7 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: 54, height: 90), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: 54, height: 120), isFill: false)
             
-        ]),
+        ], count: 40),
         
         "弟" : WordInfo(word: "弟", circleInfos: [
             WordInfo.CircleInfo(offsetSize: CGSize(width: -51, height: -115), isFill: false),
@@ -465,7 +467,51 @@ class WordInfoData: ObservableObject {
             WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: 93), isFill: false),
             WordInfo.CircleInfo(offsetSize: CGSize(width: -110, height: 107), isFill: false),
             
-        ])
+        ], count: 40),
+        
+        /*"勝" : WordInfo(word: "勝", circleInfos: [
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -103, height: -110), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -70), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -105, height: -10), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -107, height: 45), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -116, height: 100), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: -113), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -58, height: -108), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -70), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: -10), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 45), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -56, height: 90), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -73, height: 120), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: -46), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -80, height: 22), isFill: false), //月
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -17, height: -105), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 90, height: -105), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -17, height: -71), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 13, height: -71), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 43, height: -71), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 73, height: -71), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 103, height: -71), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -20, height: -21), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 11, height: -21), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 43, height: -21), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 75, height: -21), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 106, height: -21), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 32, height: -105), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 18, height: -48), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -18, height: 15), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 67, height: -47), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 103, height: 15), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -5, height: 37), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 30, height: 37), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 65, height: 37), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 94, height: 55), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 92, height: 93), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 60, height: 120), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 37, height: 12), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: 23, height: 75), isFill: false),
+         WordInfo.CircleInfo(offsetSize: CGSize(width: -15, height: 112), isFill: false)
+         
+         ], count: 40)*/
         
     ]
     
