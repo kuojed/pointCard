@@ -120,7 +120,7 @@ struct WordPictureView: View {
                         .offset(x: 0, y: screenH > 800 ? -20 : -35)
                     
                 }
-                .navigationBarTitle(Text("題目數"), displayMode: .inline)
+                .navigationBarTitle(Text("十萬遍題目表"), displayMode: .inline)
             }
             .disabled(buttonOff)
             .onAppear {

@@ -23,9 +23,51 @@ struct StopWatchView: View {
     
     @State var resetStatus = true
     
+    @State var totalTime_today = DateComponents(hour: 0, minute: 0, second: 0)
+    
+    @State var recordDate: String?
+    
     //    @Binding var showStopWatchView: Bool
     
     func updateUI(value: Date) {
+        
+        let now = Date()
+        
+        let formatter = DateFormatter()
+
+        formatter.timeZone = TimeZone.current
+
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        let dateString = formatter.string(from: now)
+        
+        var recordDate = UserDefaults.standard.string(forKey: "recordDate")
+        
+        if recordDate == nil {
+            
+            recordDate = dateString
+            
+            UserDefaults.standard.set(recordDate, forKey: "recordDate")
+            
+            
+        } else if recordDate != dateString {
+            
+            self.totalTime_today = self.totalTime
+            
+            tempTime_today = DateComponents(hour: 0, minute: 0, second: 0)
+            
+            UserDefaults.standard.set(tempTime_today.hour, forKey: "hour_temp")
+            
+            UserDefaults.standard.set(tempTime_today.minute, forKey: "min_temp")
+            
+            UserDefaults.standard.set(tempTime_today.second, forKey: "sec_temp")
+            
+            recordDate = dateString
+            
+            UserDefaults.standard.set(recordDate, forKey: "recordDate")
+        }
+        
+        
         if let startTime = self.startTime {
             
             //print("value = \(value)")
@@ -50,10 +92,44 @@ struct StopWatchView: View {
             }
             //            print("updaet totalTime", self.totalTime)
             
+            
+            self.totalTime_today.second = tempTime_today.second! + self.totalTime.second!
+            
+            self.totalTime_today.minute = tempTime_today.minute! + self.totalTime.minute!
+            
+            self.totalTime_today.hour = tempTime_today.hour! + self.totalTime.hour!
+            
+            if self.totalTime_today.second! >= 60 {
+                self.totalTime_today.second! = self.totalTime_today.second! % 60
+                self.totalTime_today.minute! = self.totalTime_today.minute! + 1
+            }
+            
+            if self.totalTime_today.minute! >= 60 {
+                self.totalTime_today.minute! = self.totalTime_today.minute! % 60
+                self.totalTime_today.hour! = self.totalTime_today.hour! + 1
+            }
+            
+            
         } else {
             
-            totalTime = initialTime
+            self.totalTime = initialTime
             
+            self.totalTime_today.second! = tempTime_today.second! + self.totalTime.second!
+            
+            self.totalTime_today.minute! = tempTime_today.minute! + self.totalTime.minute!
+            
+            self.totalTime_today.hour! = tempTime_today.hour! + self.totalTime.hour!
+            
+            if self.totalTime_today.second! >= 60 {
+                self.totalTime_today.second! = self.totalTime_today.second! % 60
+                self.totalTime_today.minute! = self.totalTime_today.minute! + 1
+            }
+            
+            if self.totalTime_today.minute! >= 60 {
+                self.totalTime_today.minute! = self.totalTime_today.minute! % 60
+                self.totalTime_today.hour! = self.totalTime_today.hour! + 1
+            }
+
         }
     }
     
@@ -80,12 +156,46 @@ struct StopWatchView: View {
                 //                }, alignment: .topTrailing)
                 
                 
-                VStack(spacing: 80){
+                VStack(spacing: 50){
                     
-                    {Text((totalTime.hour ?? 0) < 10 ? "0\(totalTime.hour!)" : "\(totalTime.hour!)") + Text(":") + Text((totalTime.minute ?? 0) < 10 ? "0\(totalTime.minute!)" : "\(totalTime.minute!)") + Text(":") + Text((totalTime.second ?? 0) < 10 ? "0\(totalTime.second!)" : "\(totalTime.second!)")}()
-                        .foregroundColor(.white)
-                        //  .font(.system(size: 65))
-                        .font(.custom("jf-openhuninn-1.1", size: 65))
+                    
+                    ZStack{
+                        
+                        VStack(spacing: 20){
+                            
+                            HStack{
+                                Text("今日累積:")
+                                    .font(.custom("jf-openhuninn-1.1", size: 20))
+                                    .foregroundColor(Color(red: 210/255, green: 210/255, blue: 210/255))
+                                
+                                Text((totalTime_today.hour ?? 0) < 10 ? "0\(totalTime_today.hour!):" : "\(totalTime_today.hour!):")
+                                    .font(.custom("jf-openhuninn-1.1", size: 20))
+                                    .foregroundColor(Color(red: 210/255, green: 210/255, blue: 210/255)) +
+                                    
+                                    Text((totalTime_today.minute ?? 0) < 10 ? "0\(totalTime_today.minute!):" : "\(totalTime_today.minute!):")
+                                        .font(.custom("jf-openhuninn-1.1", size: 20))
+                                        .foregroundColor(Color(red: 210/255, green: 210/255, blue: 210/255)) +
+                                    
+                                    Text((totalTime_today.second ?? 0) < 10 ? "0\(totalTime_today.second!)" : "\(totalTime_today.second!)")
+                                        .font(.custom("jf-openhuninn-1.1", size: 20))
+                                        .foregroundColor(Color(red: 210/255, green: 210/255, blue: 210/255))
+                                
+                            }
+                            
+                            
+                            {Text((totalTime.hour ?? 0) < 10 ? "0\(totalTime.hour!)" : "\(totalTime.hour!)") + Text(":") + Text((totalTime.minute ?? 0) < 10 ? "0\(totalTime.minute!)" : "\(totalTime.minute!)") + Text(":") + Text((totalTime.second ?? 0) < 10 ? "0\(totalTime.second!)" : "\(totalTime.second!)")}()
+                                .foregroundColor(.white)
+                                //  .font(.system(size: 65))
+                                .font(.custom("jf-openhuninn-1.1", size: 55))
+                        }
+                        
+                        Circle()
+                            .stroke(lineWidth: 8)
+                            .frame(width: 290, height: 290)
+                            .foregroundColor(Color(red: 150/255, green: 150/255, blue: 150/255))
+                        
+                        
+                    }
                     
                     
                     HStack(spacing: 35){
@@ -94,6 +204,8 @@ struct StopWatchView: View {
                             
                             initialTime = DateComponents(hour: 0, minute: 0, second: 0)
                             self.totalTime = DateComponents(hour: 0, minute: 0, second: 0)
+                            
+                            self.totalTime_today = tempTime_today
                             
                             UserDefaults.standard.set(initialTime.hour, forKey: "hour_ini")
                             
@@ -193,6 +305,20 @@ struct StopWatchView: View {
                         
                         Button(action: {
                             
+                            let totalTime_today_sec = (self.totalTime.hour! + tempTime_today.hour!) * 3600 + (self.totalTime.minute! + tempTime_today.minute!) * 60 + (self.totalTime.second! + tempTime_today.second!)
+                            
+                            let now = Date()
+                            
+                            let formatter = DateFormatter()
+
+                            formatter.timeZone = TimeZone.current
+
+                            formatter.dateStyle = .short
+
+                            let dateString = formatter.string(from: now)
+                            
+                            UserDefaults.standard.set(totalTime_today_sec, forKey: dateString)
+                            
                             systemTime.hour = self.totalTime.hour! + systemTime.hour!
                             systemTime.minute = self.totalTime.minute! + systemTime.minute!
                             systemTime.second = self.totalTime.second! + systemTime.second!
@@ -214,6 +340,29 @@ struct StopWatchView: View {
                             UserDefaults.standard.set(systemTime.second, forKey: "sec_sys")
                             
                             //                        print(systemTime)
+                            
+                            
+                            tempTime_today.second! = tempTime_today.second! + self.totalTime.second!
+                            
+                            tempTime_today.minute! = tempTime_today.minute! + self.totalTime.minute!
+                            
+                            tempTime_today.hour! = tempTime_today.hour! + self.totalTime.hour!
+                            
+                            if tempTime_today.second! >= 60 {
+                                tempTime_today.second! = tempTime_today.second! % 60
+                                tempTime_today.minute! = tempTime_today.minute! + 1
+                            }
+                            
+                            if tempTime_today.minute! >= 60 {
+                                tempTime_today.minute! = tempTime_today.minute! % 60
+                                tempTime_today.hour! = tempTime_today.hour! + 1
+                            }
+                            
+                            UserDefaults.standard.set(tempTime_today.hour, forKey: "hour_temp")
+                            
+                            UserDefaults.standard.set(tempTime_today.minute, forKey: "min_temp")
+                            
+                            UserDefaults.standard.set(tempTime_today.second, forKey: "sec_temp")
                             
                             initialTime = DateComponents(hour: 0, minute: 0, second: 0)
                             self.totalTime = DateComponents(hour: 0, minute: 0, second: 0)
@@ -270,8 +419,7 @@ struct StopWatchView: View {
                     if ((initialTime.second != 0) || (initialTime.minute != 0) || (initialTime.hour != 0)) && self.startTime == nil {
                         self.resetStatus = false
                     }
-                    
-                    
+                     
                 }
                 .onDisappear {
                     

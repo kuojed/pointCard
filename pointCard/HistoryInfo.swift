@@ -16,6 +16,8 @@ var systemTime = DateComponents(hour: UserDefaults.standard.integer(forKey: "hou
 
 var initialTime = DateComponents(hour: UserDefaults.standard.integer(forKey: "hour_ini"),minute: UserDefaults.standard.integer(forKey: "min_ini"), second: UserDefaults.standard.integer(forKey: "sec_ini"))
 
+var tempTime_today = DateComponents(hour: UserDefaults.standard.integer(forKey: "hour_temp"),minute: UserDefaults.standard.integer(forKey: "min_temp"), second: UserDefaults.standard.integer(forKey: "sec_temp"))
+
 var residualTime_hour = 0
 var residualTime_minute = 0
 var residualTime_second = 0
@@ -120,6 +122,8 @@ struct HistoryInfo: View {
                 
                 LinearGradient(gradient: Gradient(colors: [Color(red: 220/255, green: 160/255, blue: 200/255), Color(red: 120/255, green: 180/255, blue: 220/255)]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
                 
+                
+                
                 ScrollView (showsIndicators: false) {
                     
                     
@@ -143,6 +147,7 @@ struct HistoryInfo: View {
 
 struct HistoryInfo_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryInfo()
+        let historyDataStore = HistoryDataStore()
+        return HistoryInfo().environmentObject(historyDataStore)
     }
 }

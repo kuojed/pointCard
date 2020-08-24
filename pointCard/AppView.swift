@@ -20,10 +20,16 @@ struct AppView: View {
                     Text("開始唱題")
             }
             
+            CalendarView()
+                .tabItem{
+                    Image(systemName: "calendar")
+                    Text("統計資料")
+            }
+            
             WordPictureView()
                 .tabItem{
                     Image(systemName: "doc.text.magnifyingglass")
-                    Text("目前累積")
+                    Text("題目表")
             }
             
             HistoryInfo()
