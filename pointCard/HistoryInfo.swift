@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-
-
 var systemTime = DateComponents(hour: UserDefaults.standard.integer(forKey: "hour_sys"),minute: UserDefaults.standard.integer(forKey: "min_sys"), second: UserDefaults.standard.integer(forKey: "sec_sys"))
 
 //var initialTime = DateComponents(hour: 0, minute: 0, second: 0)
