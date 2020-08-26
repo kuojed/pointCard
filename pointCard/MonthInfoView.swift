@@ -22,9 +22,31 @@ struct MonthInfoView: View {
         
         var countResult = 0
         
+        var key: String
+        
         for i in 1...31{
-            let key = Y + "/" + M + "/" + String(i)
-            //            print(key)
+            
+            
+            
+            if Int(M)! > 9 {
+                
+                if i > 9{
+                    key = Y + "/" + M + "/" + String(i)
+                } else {
+                    key = Y + "/" + M + "/0" + String(i)
+                }
+                
+                
+            } else {
+                if i > 9{
+                    key = Y + "/0" + M + "/" + String(i)
+                } else {
+                    key = Y + "/0" + M + "/0" + String(i)
+                }
+                
+            }
+            
+//            print(key)
             countResult = countResult + UserDefaults.standard.integer(forKey: key)
         }
         
@@ -34,7 +56,7 @@ struct MonthInfoView: View {
     
     var body: some View {
         
-//        let screenH = UIScreen.main.bounds.height // 讀取螢幕高度
+        //        let screenH = UIScreen.main.bounds.height // 讀取螢幕高度
         let screenW = UIScreen.main.bounds.width // 讀取螢幕高度
         
         let totalMonthSec = monthCount(Y: monthInfo.year, M: monthInfo.month)

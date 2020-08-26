@@ -313,9 +313,12 @@ struct StopWatchView: View {
 
                             formatter.timeZone = TimeZone.current
 
-                            formatter.dateStyle = .short
+//                            formatter.dateStyle = .short
+                            formatter.dateFormat = "yyyy/MM/dd"
 
                             let dateString = formatter.string(from: now)
+                            
+//                            print(dateString)
                             
                             UserDefaults.standard.set(totalTime_today_sec, forKey: dateString)
                             

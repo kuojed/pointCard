@@ -91,7 +91,8 @@ extension CalendarView{
         //        if self.calendarManager.selectedDate != nil  {
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+//        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
         let dateString = formatter.string(from: date)
         
         if UserDefaults.standard.integer(forKey: dateString) != 0 {
@@ -129,7 +130,9 @@ extension CalendarView{
     func calendar(viewForSelectedDate date: Date, dimensions size: CGSize) -> AnyView {
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+//        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
+        
         let dateString = formatter.string(from: date)
         
         return TodayInfoView(searchKey: dateString).erased
